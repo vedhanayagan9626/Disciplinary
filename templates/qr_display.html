@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .qr-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .student-info {
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .qr-image {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .download-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student QR Code</h1>
+    
+    <div class="qr-container">
+        <div class="student-info">
+            QR Code for: <span id="register-number"></span>
+        </div>
+        
+        <div class="qr-image">
+            <img id="qr-img" src="" alt="Student QR Code">
+        </div>
+        
+        <a href="#" class="download-btn" id="download-link">Download QR Code</a>
+    </div>
+
+    <script>
+        // Get data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const qrData = urlParams.get('qr');
+        const registerNumber = urlParams.get('reg');
+        
+        if (qrData && registerNumber) {
+            document.getElementById('qr-img').src = 'data:image/png;base64,' + qrData;
+            document.getElementById('register-number').textContent = registerNumber;
+            
+            // Set up download link
+            const downloadLink = document.getElementById('download-link');
+            downloadLink.href = 'data:image/png;base64,' + qrData;
+            downloadLink.download = 'qr_' + registerNumber + '.png';
+        } else {
+            document.body.innerHTML = '<h2>Error: No QR code data found</h2>';
+        }
+    </script>
+</body>
+</html>
