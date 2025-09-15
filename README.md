@@ -1,4 +1,4 @@
-# Kiaalap admin dashboard
+# Used Template admin dashboard
 Free admin dashboard template
 
 # Preview
